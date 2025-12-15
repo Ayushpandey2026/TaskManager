@@ -1,73 +1,155 @@
-# React + TypeScript + Vite
+# Ablespace Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **frontend** for the **Ablespace** project, built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS**. It connects to the Ablespace backend to manage authentication, tasks, and real-time notifications.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠 Tech Stack
 
-## React Compiler
+- **React** + **TypeScript**
+- **Vite** as the build tool
+- **Tailwind CSS** for styling
+- **React Hook Form** + **Zod** for form validation
+- **Axios** for API requests
+- **React Query** for server state management
+- **Socket.IO Client** for real-time updates
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ⚡ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- User registration and login
+- Task management (create, update, delete, filter)
+- Real-time task updates via Socket.IO
+- Notifications
+- Protected routes with authentication
+- Responsive UI using Tailwind CSS
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 📁 Project Structure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+<pre>
+frontend/
+├── public/
+│   └── logo.svg
+├── src/
+│   ├── api/                    # API layer
+│   │   ├── auth.api.ts
+│   │   ├── task.api.ts
+│   │   └── user.api.ts
+│   │
+│   ├── app/                    # App-level setup
+│   │   ├── router.tsx
+│   │   ├── queryClient.ts
+│   │   └── providers.tsx
+│   │
+│   ├── components/
+│   │   ├── common/
+│   │   │   ├── Button.tsx
+│   │   │   ├── Input.tsx
+│   │   │   ├── Modal.tsx
+│   │   │   └── Skeleton.tsx
+│   │   ├── layout/
+│   │   │   ├── Navbar.tsx
+│   │   │   └── Sidebar.tsx
+│   │   ├── notifications/
+│   │   │   └── NotificationBell.tsx
+│   │   └── tasks/
+│   │       ├── TaskCard.tsx
+│   │       ├── TaskForm.tsx
+│   │       ├── TaskFilters.tsx
+│   │       └── TaskList.tsx
+│   │
+│   ├── hooks/
+│   │   ├── useAuth.ts
+│   │   ├── useTasks.ts
+│   │   ├── useSocket.ts
+│   │   └── useNotifications.ts
+│   │
+│   ├── pages/
+│   │   ├── auth/
+│   │   │   ├── Login.tsx
+│   │   │   └── Register.tsx
+│   │   ├── Dashboard.tsx
+│   │   ├── Tasks.tsx
+│   │   └── Profile.tsx
+│   │
+│   ├── schemas/               # Zod schemas
+│   │   ├── auth.schema.ts
+│   │   └── task.schema.ts
+│   │
+│   ├── types/
+│   │   ├── task.types.ts
+│   │   └── user.types.ts
+│   │
+│   ├── utils/
+│   │   ├── axios.ts
+│   │   └── socket.ts
+│   │
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+│
+├── tailwind.config.js
+├── postcss.config.js
+├── tsconfig.json
+├── vite.config.ts
+└── package.json
+</pre>
+
+
+
+
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
 ```
+1.git clone https://github.com/<your-username>/ablespace-frontend.git
+cd ablespace-frontend
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+npm install
+3. Create a .env file
+Create a .env file in the root (if required):
+
+env
+
+VITE_API_URL=http://localhost:3000
+Make sure this matches your backend URL.
+
+4. Run the development server
+
+npm run dev
+Open http://localhost:5173 in your browser.
+
+🔑 Available Scripts
+Command	Description
+npm run dev	Run the development server
+npm run build	Build the project for production
+npm run preview	Preview the production build
+
+🤝 Contributing
+Fork the repository
+
+Create your feature branch
+
+
+git checkout -b feature/my-feature
+Commit your changes
+
+
+git commit -m "Add some feature"
+Push to your branch
+
+
+git push origin feature/my-feature
+Open a Pull Request
+
+
+
