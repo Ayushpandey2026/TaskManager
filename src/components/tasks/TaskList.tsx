@@ -1,10 +1,17 @@
 import { useTasks } from "../../hooks/useTasks";
 import TaskCard from "./TaskCard";
+import type { Task } from "../../types/task.types";
 
-export default function TaskList() {
-  const { tasks, isLoading } = useTasks();
+interface TaskListProps {
+  tasks?: Task[];
+  showFilters?: boolean;
+}
 
-  if (isLoading) return <p>Loading tasks...</p>;
+export default function TaskList({ tasks: propTasks }: TaskListProps) {
+  const { tasks: hookTasks, isLoading } = useTasks();
+  const tasks = propTasks || hookTasks;
+
+  if (isLoading && !propTasks) return <p>Loading tasks...</p>;
 
   return (
     <div className="space-y-3">

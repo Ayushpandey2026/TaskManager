@@ -22,8 +22,7 @@ export const useSocket = () => {
 
     socket.on(
       "task-assigned",
-
-      (data: { taskId: string; taskTitle: string; assignedBy: string }) => {
+      () => {
         // refresh notifications list instead of calling addNotification
         queryClient.invalidateQueries({ queryKey: ["notifications"] });
       }

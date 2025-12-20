@@ -5,7 +5,7 @@ export const taskSchema = z.object({
   description: z.string().optional(),
   dueDate: z.string(),
   priority: z.enum(["Low", "Medium", "High", "Urgent"]),
-  status: z.enum(["To Do", "In Progress", "Review", "Completed"]).default("To Do"),
+  status: z.enum(["To Do", "In Progress", "Review", "Completed"]),
 });
 
 export type TaskFormData = z.infer<typeof taskSchema>;

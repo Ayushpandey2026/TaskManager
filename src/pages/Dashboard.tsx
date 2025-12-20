@@ -6,7 +6,7 @@ import { useTasks } from "../hooks/useTasks";
 
 export default function Dashboard() {
   useSocket(); // activate realtime
-  const { categorizedTasks, isLoading } = useTasks();
+  const { categorizedTasks } = useTasks();
 
   return (
     <div className="flex">
