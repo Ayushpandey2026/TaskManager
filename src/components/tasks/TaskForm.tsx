@@ -49,6 +49,13 @@ export default function TaskForm({ onSubmit }: Props) {
         <option value="Urgent">Urgent</option>
       </select>
 
+      <select {...register("status")} className="w-full border p-2 rounded">
+        <option value="To Do">To Do</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Review">Review</option>
+        <option value="Completed">Completed</option>
+      </select>
+
       <Button type="submit">Create Task</Button>
     </form>
   );

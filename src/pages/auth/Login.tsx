@@ -3,23 +3,24 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../schemas/auth.schema";
 import type { LoginFormData } from "../../schemas/auth.schema";
 
-import { loginApi } from "../../api/auth.api";
+import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/common/Button";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login, isLoginLoading } = useAuth();
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
   });
 
   const onSubmit = async (data: LoginFormData) => {
-    await loginApi(data);
+    await login(data);
     navigate("/");
   };
 
@@ -50,7 +51,7 @@ export default function Login() {
           <p className="text-red-500 text-sm">{errors.password.message}</p>
         )}
 
-        <Button type="submit" isLoading={isSubmitting}>
+        <Button type="submit" isLoading={isLoginLoading}>
           Login
         </Button>
       </form>

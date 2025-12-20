@@ -3,23 +3,24 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "../../schemas/auth.schema";
 import type { RegisterFormData } from "../../schemas/auth.schema";
 
-import { registerApi } from "../../api/auth.api";
+import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/common/Button";
 
 export default function Register() {
   const navigate = useNavigate();
+  const { register: registerUser, isRegisterLoading } = useAuth();
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
   });
 
   const onSubmit = async (data: RegisterFormData) => {
-    await registerApi(data);
+    await registerUser(data);
     navigate("/login");
   };
 
@@ -59,7 +60,7 @@ export default function Register() {
           <p className="text-red-500 text-sm">{errors.password.message}</p>
         )}
 
-        <Button type="submit" isLoading={isSubmitting}>
+        <Button type="submit" isLoading={isRegisterLoading}>
           Register
         </Button>
       </form>

@@ -7,10 +7,11 @@ export interface TaskQuery {
   sortBy?: "dueDate";
 }
 
-export const getTasksApi = async (query?: TaskQuery) => {
-  const res = await axios.get("/tasks", { params: query });
-  return res.data as Task[];
+export const getTasksApi = async (): Promise<Task[]> => {
+  const res = await axios.get("/tasks");
+  return res.data;
 };
+
 
 export const createTaskApi = async (payload: Partial<Task>) => {
   const res = await axios.post("/tasks", payload);
