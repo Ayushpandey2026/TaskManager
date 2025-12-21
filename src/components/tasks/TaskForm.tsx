@@ -15,6 +15,9 @@ export default function TaskForm({ onSubmit }: Props) {
     formState: { errors },
   } = useForm<TaskFormData>({
     resolver: zodResolver(taskSchema),
+    defaultValues: {
+      status: "To Do",
+    },
   });
 
   return (
